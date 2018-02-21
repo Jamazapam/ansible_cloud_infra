@@ -20,7 +20,7 @@
 - name: setup app tier
   hosts: apps
   become: yes
-  gather_facts: false
+  gather_facts: true
   roles:
     - {name: pre_configuration  }
     - {name: tomcat }
@@ -34,4 +34,5 @@
   roles:
     - {name: pre_configuration}
     - {name: postgresql}
+
 

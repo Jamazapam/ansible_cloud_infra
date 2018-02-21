@@ -49,7 +49,7 @@
       cloud: ospcloud
       state: present
       name: router1
-      network: ext_network
+      network: external_network
       external_fixed_ips:
         - subnet: external_subnet
       interfaces:

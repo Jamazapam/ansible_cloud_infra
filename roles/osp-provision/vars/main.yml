@@ -5,27 +5,27 @@ osp_servers:
     image: rhel-guest
     key_name: ansible_ssh
     flavor: m2.small
-    security_group: apps
+    security_group: app_servers
     meta:
-      - { group: apps, deployment_name: dev }
+      - { group: apps, deployment_name: QA }
   app2:
     name: app2
     state: present
     image: rhel-guest
     key_name: ansible_ssh
     flavor: m2.small
-    security_group: apps
+    security_group: app_servers
     meta:
-      - { group: apps, deployment_name: dev } 
+      - { group: apps, deployment_name: QA } 
   db:
     name: db
     state: present
     image: rhel-guest
     key_name: ansible_ssh
     flavor: m2.small
-    security_group: apps
+    security_group: db_servers
     meta:
-      - {group: appdbs, deployment_name: dev }
+      - {group: appdbs, deployment_name: QA }
 
   frontend:
     name: frontend
@@ -33,6 +33,6 @@ osp_servers:
     image: rhel-guest
     key_name: ansible_ssh
     flavor: m2.small
-    security_group: apps
+    security_group: frontend_servers
     meta:
-      - { group: frontends, deployment_name: dev }
+      - { group: frontends, deployment_name: QA }

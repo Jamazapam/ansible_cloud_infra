@@ -32,19 +32,22 @@
     network: external_network
     wait: true
     timeout: 180
-  register: instancefloatingip
-  with_dict: "{{osp-servers}}"
+  with_dict: "{{osp_servers}}"
 
+- name: OpenStack servers
+  os_server_facts:
+    cloud: ospcloud
+  register: openstack_servers
+- debug:
+    var: openstack_servers 
 
-- name: Show "{{ instanceip }}" public IP
-  debug: var=instancefloatingip.floating_ip.floating_ip_address
-- name: Wait for "{{ instance_name }}" to be available
+- name: Wait for server to be available
   wait_for:
-    host: "{{ instancefloatingip.floating_ip.floating_ip_address }}"
+    host: "{{ item.public_v4 }}"
     port: 22
     search_regex: OpenSSH
     timeout: 600
-  delegate_to: "{{ inventory_hostname }}"
-
-
+#  delegate_to: "{{ inventory_hostname }}"
+  with_items: 
+    - "{{ openstack_servers.ansible_facts.openstack_servers}}"
 

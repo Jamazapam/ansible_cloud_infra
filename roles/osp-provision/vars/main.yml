@@ -35,4 +35,4 @@ osp_servers:
     flavor: m2.small
     security_group: apps
     meta:
-      - { group: frontend, deployment_name: dev }
+      - { group: frontends, deployment_name: dev }
